@@ -1,0 +1,20 @@
+{
+  "name": "antd-dayjs-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Day.js webpack plugin for ant design",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Day.js",
+    "Webpack",
+    "Moment",
+    "antd"
+  ],
+  "dependencies": {
+    "dayjs": "*"
+  },
+  "author": "iamkun",
+  "license": "MIT"
+}
