@@ -16,14 +16,13 @@ A webpack plugin for [dayjs](https://github.com/iamkun/dayjs).
 ## Example
 
 ```js
+// webpack-config.js
 import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
-
-const configuration = {};
 
 module.exports = {
   // ...
   plugins: [
-    new AntdDayjsWebpackPlugin(configuration)
+    new AntdDayjsWebpackPlugin()
   ]
 };
 ```
