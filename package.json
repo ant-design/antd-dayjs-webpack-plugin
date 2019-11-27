@@ -1,7 +1,7 @@
 {
   "name": "antd-dayjs-webpack-plugin",
-  "version": "0.0.1",
-  "description": "Day.js webpack plugin for ant design",
+  "version": "0.0.2",
+  "description": "Day.js webpack plugin for Ant Design(antd)",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +14,14 @@
   ],
   "dependencies": {
     "dayjs": "*"
+  },
+  "homepage": "https://github.com/ant-design/antd-dayjs-webpack-plugin",
+  "bugs": {
+    "url": "https://github.com/ant-design/antd-dayjs-webpack-plugin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ant-design/antd-dayjs-webpack-plugin"
   },
   "author": "iamkun",
   "license": "MIT"
