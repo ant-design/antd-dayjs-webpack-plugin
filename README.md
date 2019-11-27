@@ -1,6 +1,6 @@
 # antd-dayjs-webpack-plugin
 
-[![NPM version](http://img.shields.io/npm/v/antd-dayjs-webpack-plugin.svg?style=flat-square)](https://www.npmjs.org/package/antd-dayjs-webpack-plugin)
+[![NPM version](http://img.shields.io/npm/v/antd-dayjs-webpack-plugin.svg?style=flat-square)](https://www.npmjs.org/package/antd-dayjs-webpack-plugin) [![Greenkeeper badge](https://badges.greenkeeper.io/ant-design/antd-dayjs-webpack-plugin.svg)](https://greenkeeper.io/)
 
 A webpack plugin for [dayjs](https://github.com/iamkun/dayjs). 
 
