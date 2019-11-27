@@ -45,6 +45,5 @@ module.exports = {
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ----------------- | -------------------------------- | --------------- | ------ | ------ |
 | plugins           | plugin name    | Array[string]          |   all support plugins    |    []    |
-| locales              | locale name                | Array[string] | all support locales | []  |
 | replaceMoment              | replace moment to dayjs with webpack alias config  | Boolean | true / false | false  |
 | preset              | name of preset configuration                   | String | antd | -  |
