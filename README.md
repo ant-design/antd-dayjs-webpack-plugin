@@ -2,7 +2,7 @@
 
 [![NPM version](http://img.shields.io/npm/v/antd-dayjs-webpack-plugin.svg?&colorB=51C838&style=flat-square)](https://www.npmjs.org/package/antd-dayjs-webpack-plugin)
 
-A webpack plugin for [dayjs](https://github.com/iamkun/dayjs). 一个 Day.js 的 Weppack 插件。
+A webpack plugin for [Day.js](https://github.com/iamkun/dayjs). 一个 Day.js 的 Weppack 插件。
 
 Replace Moment.js with Day.js in antd project in ONE step. Bundle size reduced from 65 kb -> 4.19 kb.
 
