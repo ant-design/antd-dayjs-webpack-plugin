@@ -1,7 +1,7 @@
 {
   "name": "antd-dayjs-webpack-plugin",
   "version": "0.0.5",
-  "description": "Day.js webpack plugin for Ant Design(antd)",
+  "description": "Day.js webpack plugin for Ant Design (antd)",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
