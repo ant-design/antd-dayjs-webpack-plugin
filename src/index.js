@@ -19,13 +19,25 @@ const presets = {
 }
 
 const makeEntry = (entry, initEntry) => {
-  if (typeof entry === 'string') {
-    return [initEntry, entry]
+  if (typeof entry === "object" && !Array.isArray(entry)) {
+    Object.keys(entry).forEach(e => {
+      entry[e] = makeEntry(entry[e], initEntry);
+    });
+    return entry;
+  }
+  if (typeof entry === "string") {
+    return [initEntry, entry];
   }
   if (Array.isArray(entry)) {
-    return [initEntry].concat(entry)
+    return [initEntry].concat(entry);
   }
-}
+  if (typeof entry === "function") {
+    return async () => {
+      const originalEntry = await entry();
+      return makeEntry(originalEntry, initEntry);
+    };
+  }
+};
 
 class WebpackDayjsPlugin {
   constructor(options = { preset: 'antd' }) {
@@ -52,13 +64,7 @@ class WebpackDayjsPlugin {
       fs.writeFileSync(initFilePath, initContent)
       const { entry } = compiler.options;
       const initEntry = require.resolve(initFilePath)
-      if (typeof entry === 'object' && !Array.isArray(entry)) {
-        Object.keys(entry).forEach(e => {
-          entry[e] = makeEntry(entry[e], initEntry)
-        })
-      } else {
-        compiler.options.entry = makeEntry(entry, initEntry)
-      }
+      compiler.options.entry = makeEntry(entry, initEntry);
     }
     // set dayjs alias
     if (this.replaceMoment) {
