@@ -1,6 +1,6 @@
 {
   "name": "antd-dayjs-webpack-plugin",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Day.js webpack plugin for Ant Design (antd)",
   "main": "src/index.js",
   "scripts": {
