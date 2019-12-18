@@ -8,6 +8,7 @@ const presets = {
       'isSameOrAfter',
       'advancedFormat',
       'customParseFormat',
+      'weekday',
       'weekYear',
       'weekOfYear',
       'isMoment',
