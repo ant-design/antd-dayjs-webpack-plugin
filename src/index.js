@@ -13,6 +13,7 @@ const presets = {
       'weekOfYear',
       'isMoment',
       'localeData',
+      'localizedFormat',
       'badMutable'
     ],
     replaceMoment: true
