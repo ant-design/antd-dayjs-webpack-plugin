@@ -41,6 +41,8 @@ module.exports = {
 
 ### Configuration 配置
 
+No configuration needed unless you know what these configs mean. 默认无需额外配置，除非有特殊需要。
+
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ----------------- | -------------------------------- | --------------- | ------ | ------ |
 | plugins           | plugin name    | Array[string]          |   all support plugins    |    []    |
