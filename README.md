@@ -39,9 +39,9 @@ module.exports = {
 };
 
 // index.js
+import 'dayjs/locale/zh-cn'
 // 如果要使用非"英语"语言，请在项目文件里引入对应的语言包
 // if using locale other than 'en', please load the locale file in advance
-import 'dayjs/locale/zh-cn'
 ```
 
 ### Configuration 配置
