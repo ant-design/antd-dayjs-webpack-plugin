@@ -63,6 +63,8 @@ class WebpackDayjsPlugin {
       this.plugins.forEach((plugin) => {
         initContent += `dayjs.extend(${plugin});`
       })
+      // special plugin
+      initContent += `var antdPlugin = require( 'antd-dayjs-webpack-plugin/src/antd-plugin');dayjs.extend(antdPlugin);`
       fs.writeFileSync(initFilePath, initContent)
       const { entry } = compiler.options;
       const initEntry = require.resolve(initFilePath)
