@@ -44,6 +44,18 @@ import 'dayjs/locale/zh-cn'
 // if using locale other than 'en', please load the locale file in advance
 ```
 
+## Ant Design 3.x Notice Ant Design 3.x 注意事项
+If you are using this plugin in a Ant Design 3.x project, you have to config it manually.
+如果在 Ant Design 3.x 的项目中使用本插件，需要传入以下配置。
+
+```js
+  plugins: [
+    new AntdDayjsWebpackPlugin({
+      preset: 'antdv3'
+    })
+  ]
+```
+
 ### Configuration 配置
 
 No configuration needed unless you know what these configs mean. 默认无需额外配置，除非有特殊需要。
@@ -56,10 +68,10 @@ No configuration needed unless you know what these configs mean. 默认无需额
 
 ### Notice 说明
 
-1. Day.js is designed to be immutable, however, in order to make full compatible to moment.js in Antd, we have to use a plugin 🚨 `BadMutable` 🚨 to make Day.js mutable. This's not good and not what we want, but there's no better option. With this plugin enabled, all setters will update the instance itself.
-
-- Day.js 被设计成不可变的对象，但是为了完成对 moment.js 的替换，必须要引入一个 🚨 `BadMutable` 🚨插件让其变成可变对象，这并不是一个好的选择，但为了兼容也没有更好的办法。当使用这个插件后，所有的 setter 都会更新当前实例。
-
-2. Day.js is a lightweight library with only 2kb size, but we have to use some other plugins to make full compatible to moment.js in Antd, so the final bundle size is 4.19 kb (Still small 😀)
+1. Day.js is a lightweight library with only 2kb size, but we have to use some other plugins to make full compatible to moment.js in Antd, so the final bundle size is 4.19 kb (Still small 😀)
 
 - Day.js 是一个只有 2kb 的轻量级时间库，但为了完成对 moment.js 和 Antd 代码的替换，我们需要引入一些特殊的插件，这会使最终的体积变成 4.19 kb （但仍然很小呀😀 ）
+
+2. If you are using preset `antdv3` in a Ant Design 3.x project, please note: Day.js is designed to be immutable, however, in order to make full compatible to moment.js in Antd 3.x, we have to use a plugin 🚨 `BadMutable` 🚨 to make Day.js mutable. This's not good and not what we want, but there's no better option. With this plugin enabled, all setters will update the instance itself.
+
+- 如果是在 Ant Design 3.x 项目中使用了 `antdv3` 配置，请注意： Day.js 被设计成不可变的对象，但是为了完成对 moment.js 的替换，必须要引入一个 🚨 `BadMutable` 🚨插件让其变成可变对象，这并不是一个好的选择，但为了兼容也没有更好的办法。当使用这个插件后，所有的 setter 都会更新当前实例。
