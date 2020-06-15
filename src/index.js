@@ -58,7 +58,8 @@ const makeEntry = (entry, initEntry) => {
 
 class WebpackDayjsPlugin {
   constructor(options = { preset: 'antd' }) {
-    const { preset, plugins, replaceMoment } = options;
+    const { preset, plugins, replaceMoment, initFilePath } = options;
+    if (initFilePath) this.initFilePath = initFilePath
     if (preset && presets[preset]) {
       this.plugins = presets[preset].plugins
       this.replaceMoment = presets[preset].replaceMoment
@@ -70,7 +71,7 @@ class WebpackDayjsPlugin {
   apply(compiler) {
     // add init dayjs entry
     if (this.plugins) {
-      const initFilePath = path.resolve(__dirname, 'init-dayjs.js')
+      const initFilePath = this.initFilePath || path.resolve(__dirname, 'init-dayjs.js')
       let initContent = `var dayjs = require( 'dayjs');`
       this.plugins.forEach((plugin) => {
         initContent += `var ${plugin} = require( 'dayjs/plugin/${plugin}');`
