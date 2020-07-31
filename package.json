@@ -12,7 +12,10 @@
     "Moment",
     "antd"
   ],
-  "dependencies": {
+  "devDependencies": {
+    "dayjs": "*"
+  },
+  "peerDependencies": {
     "dayjs": "*"
   },
   "homepage": "https://github.com/ant-design/antd-dayjs-webpack-plugin",
