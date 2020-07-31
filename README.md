@@ -21,7 +21,8 @@ Replace Moment.js with Day.js in antd project in ONE step. Bundle size reduced f
 
 ## Usage 使用方法
 
-1. Install `npm i antd-dayjs-webpack-plugin`. 安装 `antd-dayjs-webpack-plugin`。
+0. Install `npm i dayjs --save`. 安装 `dayjs`。
+1. Install `npm i antd-dayjs-webpack-plugin --save-dev`. 安装 `antd-dayjs-webpack-plugin`。
 2. Add an instance of the plugin to the webpack plugin configuration. 更新 webpack 配置。
 
 
