@@ -67,6 +67,22 @@ No configuration needed unless you know what these configs mean. 默认无需额
 | replaceMoment              | replace moment to dayjs with webpack alias config  | Boolean | true / false |   |
 | preset              | name of preset configuration                   | String | 'antd' | 'antd' |
 
+Preset 'antd' contains the following plugins, you can pass your own plugin config to override it.
+'antd' 预设包含以下插件，你可以通过 plugin 选项来配置自定义的插件组合。
+```js
+[
+  'isSameOrBefore',
+  'isSameOrAfter',
+  'advancedFormat',
+  'customParseFormat',
+  'weekday',
+  'weekYear',
+  'weekOfYear',
+  'isMoment',
+  'localeData',
+  'localizedFormat',
+]
+```
 ### Notice 说明
 
 1. Day.js is a lightweight library with only 2kb size, but we have to use some other plugins to make full compatible to moment.js in Antd, so the final bundle size is 4.19 kb (Still small 😀)
