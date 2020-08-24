@@ -67,8 +67,8 @@ No configuration needed unless you know what these configs mean. 默认无需额
 | replaceMoment              | replace moment to dayjs with webpack alias config  | Boolean | true / false |   |
 | preset              | name of preset configuration                   | String | 'antd' | 'antd' |
 
-Preset 'antd' contains the following plugins, you can pass your own plugin config to override it.
-'antd' 预设包含以下插件，你可以通过 plugin 选项来配置自定义的插件组合。
+Preset 'antd' contains the following plugins and set `replaceMoment` to `true`, you can pass your own plugin config/ replaceMoment config to override it.
+'antd' 预设包含以下插件，并开启了‘替换Moment’配置，你可以通过 plugin 选项来配置自定义的插件组合及‘替换Moment’配置。
 ```js
 [
   'isSameOrBefore',
