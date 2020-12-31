@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 
 const presets = {
@@ -54,7 +53,7 @@ const makeEntry = (entry, initEntry) => {
       return makeEntry(originalEntry, initEntry);
     };
   }
-};
+}
 
 class WebpackDayjsPlugin {
   constructor(options = { preset: 'antd' }) {
@@ -68,22 +67,30 @@ class WebpackDayjsPlugin {
   }
 
   apply(compiler) {
-    // add init dayjs entry
+    // add init dayjs entry and loader
     if (this.plugins) {
+      const { entry, module } = compiler.options
+
+      const initLoaderRule = {
+        test: /init-dayjs\.js$/,
+        use: [{
+          loader: path.resolve(__dirname, './init-loader.js'),
+          options: {
+            plugins: this.plugins
+          }
+        }]
+      }
+
+      if (module.rules) {
+        module.rules.push(initLoaderRule)
+      } else {
+        compiler.options.module.rules = [initLoaderRule]
+      }
+
       const initFilePath = path.resolve(__dirname, 'init-dayjs.js')
-      let initContent = `var dayjs = require( 'dayjs');`
-      this.plugins.forEach((plugin) => {
-        initContent += `var ${plugin} = require( 'dayjs/plugin/${plugin}');`
-      })
-      this.plugins.forEach((plugin) => {
-        initContent += `dayjs.extend(${plugin});`
-      })
-      // special plugin
-      initContent += `var antdPlugin = require( 'antd-dayjs-webpack-plugin/src/antd-plugin');dayjs.extend(antdPlugin);`
-      fs.writeFileSync(initFilePath, initContent)
-      const { entry } = compiler.options;
       const initEntry = require.resolve(initFilePath)
-      compiler.options.entry = makeEntry(entry, initEntry);
+
+      compiler.options.entry = makeEntry(entry, initEntry)
     }
     // set dayjs alias
     if (this.replaceMoment) {
