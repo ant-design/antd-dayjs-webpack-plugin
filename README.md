@@ -30,7 +30,7 @@ Replace Moment.js with Day.js in antd project in ONE step. Bundle size reduced f
 
 ```js
 // webpack-config.js
-import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin';
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 module.exports = {
   // ...
