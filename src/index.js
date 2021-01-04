@@ -96,10 +96,10 @@ class WebpackDayjsPlugin {
     if (this.replaceMoment) {
       const { alias } = compiler.options.resolve
       if (alias) {
-        alias.moment = 'dayjs'
+        alias.moment = 'dayjs/dayjs.min'
       } else {
         compiler.options.resolve.alias = {
-          moment: 'dayjs'
+          moment: 'dayjs/dayjs.min'
         }
       }
     }
