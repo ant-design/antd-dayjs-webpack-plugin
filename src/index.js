@@ -72,7 +72,7 @@ class WebpackDayjsPlugin {
       const { entry, module } = compiler.options
 
       const initLoaderRule = {
-        test: /init-dayjs\.js$/,
+        test: /init-dayjs-webpack-plugin-entry\.js$/,
         use: [{
           loader: path.resolve(__dirname, './init-loader.js'),
           options: {
@@ -87,7 +87,7 @@ class WebpackDayjsPlugin {
         compiler.options.module.rules = [initLoaderRule]
       }
 
-      const initFilePath = path.resolve(__dirname, 'init-dayjs.js')
+      const initFilePath = path.resolve(__dirname, 'init-dayjs-webpack-plugin-entry.js')
       const initEntry = require.resolve(initFilePath)
 
       compiler.options.entry = makeEntry(entry, initEntry)

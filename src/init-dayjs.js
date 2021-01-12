@@ -1,1 +1,0 @@
-var dayjs = require('dayjs/dayjs.min');
