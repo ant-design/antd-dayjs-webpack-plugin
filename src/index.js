@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 const presets = {
   antd: {
@@ -14,7 +14,7 @@ const presets = {
       'localeData',
       'localizedFormat',
     ],
-    replaceMoment: true
+    replaceMoment: true,
   },
   antdv3: {
     plugins: [
@@ -28,82 +28,93 @@ const presets = {
       'isMoment',
       'localeData',
       'localizedFormat',
-      'badMutable'
+      'badMutable',
     ],
-    replaceMoment: true
-  }
-}
+    replaceMoment: true,
+  },
+};
 
 const makeEntry = (entry, initEntry) => {
-  if (typeof entry === "object" && !Array.isArray(entry)) {
-    Object.keys(entry).forEach(e => {
-      entry[e] = makeEntry(entry[e], initEntry);
-    });
-    return entry;
+  if (typeof entry === 'object' && !Array.isArray(entry)) {
+    return Object.entries(entry).reduce(
+        (acc, [curKey, curEntry]) => ({
+          ...acc,
+          [curKey]:
+              typeof curEntry === 'object' && curEntry.import
+                  ? {
+                    ...curEntry,
+                    import: makeEntry(curEntry.import, initEntry),
+                  }
+                  : makeEntry(curEntry, initEntry),
+        }),
+        {}
+    );
   }
-  if (typeof entry === "string") {
+  if (typeof entry === 'string') {
     return [initEntry, entry];
   }
   if (Array.isArray(entry)) {
     return [initEntry].concat(entry);
   }
-  if (typeof entry === "function") {
+  if (typeof entry === 'function') {
     return async () => {
       const originalEntry = await entry();
       return makeEntry(originalEntry, initEntry);
     };
   }
-}
+};
 
 class WebpackDayjsPlugin {
   constructor(options = { preset: 'antd' }) {
     const { preset, plugins, replaceMoment } = options;
     if (preset && presets[preset]) {
-      this.plugins = presets[preset].plugins
-      this.replaceMoment = presets[preset].replaceMoment
+      this.plugins = presets[preset].plugins;
+      this.replaceMoment = presets[preset].replaceMoment;
     }
-    if (plugins) this.plugins = plugins
-    if (replaceMoment !== undefined) this.replaceMoment = replaceMoment
+    if (plugins) this.plugins = plugins;
+    if (replaceMoment !== undefined) this.replaceMoment = replaceMoment;
   }
 
   apply(compiler) {
     // add init dayjs entry and loader
     if (this.plugins) {
-      const { entry, module } = compiler.options
+      const { entry, module } = compiler.options;
 
       const initLoaderRule = {
         test: /init-dayjs-webpack-plugin-entry\.js$/,
-        use: [{
-          loader: path.resolve(__dirname, './init-loader.js'),
-          options: {
-            plugins: this.plugins
-          }
-        }]
-      }
+        use: [
+          {
+            loader: path.resolve(__dirname, './init-loader.js'),
+            options: {
+              plugins: this.plugins,
+            },
+          },
+        ],
+      };
 
       if (module.rules) {
-        module.rules.push(initLoaderRule)
+        module.rules.push(initLoaderRule);
       } else {
-        compiler.options.module.rules = [initLoaderRule]
+        compiler.options.module.rules = [initLoaderRule];
       }
 
-      const initFilePath = path.resolve(__dirname, 'init-dayjs-webpack-plugin-entry.js')
-      const initEntry = require.resolve(initFilePath)
+      const initFilePath = path.resolve(__dirname, 'init-dayjs-webpack-plugin-entry.js');
+      const initEntry = require.resolve(initFilePath);
 
-      compiler.options.entry = makeEntry(entry, initEntry)
+      compiler.options.entry = makeEntry(entry, initEntry);
     }
     // set dayjs alias
     if (this.replaceMoment) {
-      const { alias } = compiler.options.resolve
+      const { alias } = compiler.options.resolve;
       if (alias) {
-        alias.moment = 'dayjs'
+        alias.moment = 'dayjs';
       } else {
         compiler.options.resolve.alias = {
-          moment: 'dayjs'
-        }
+          moment: 'dayjs',
+        };
       }
     }
   }
 }
 
-module.exports = WebpackDayjsPlugin
+module.exports = WebpackDayjsPlugin;
