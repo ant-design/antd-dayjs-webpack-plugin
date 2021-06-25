@@ -1,46 +1,46 @@
-const path = require("path");
+const path = require('path');
 
 const presets = {
   antd: {
     plugins: [
-      "isSameOrBefore",
-      "isSameOrAfter",
-      "advancedFormat",
-      "customParseFormat",
-      "weekday",
-      "weekYear",
-      "weekOfYear",
-      "isMoment",
-      "localeData",
-      "localizedFormat",
+      'isSameOrBefore',
+      'isSameOrAfter',
+      'advancedFormat',
+      'customParseFormat',
+      'weekday',
+      'weekYear',
+      'weekOfYear',
+      'isMoment',
+      'localeData',
+      'localizedFormat',
     ],
     replaceMoment: true,
   },
   antdv3: {
     plugins: [
-      "isSameOrBefore",
-      "isSameOrAfter",
-      "advancedFormat",
-      "customParseFormat",
-      "weekday",
-      "weekYear",
-      "weekOfYear",
-      "isMoment",
-      "localeData",
-      "localizedFormat",
-      "badMutable",
+      'isSameOrBefore',
+      'isSameOrAfter',
+      'advancedFormat',
+      'customParseFormat',
+      'weekday',
+      'weekYear',
+      'weekOfYear',
+      'isMoment',
+      'localeData',
+      'localizedFormat',
+      'badMutable',
     ],
     replaceMoment: true,
   },
 };
 
 const makeEntry = (entry, initEntry) => {
-  if (typeof entry === "object" && !Array.isArray(entry)) {
+  if (typeof entry === 'object' && !Array.isArray(entry)) {
     return Object.entries(entry).reduce(
         (acc, [curKey, curEntry]) => ({
           ...acc,
           [curKey]:
-              typeof curEntry === "object" && curEntry.import
+              typeof curEntry === 'object' && curEntry.import
                   ? {
                     ...curEntry,
                     import: makeEntry(curEntry.import, initEntry),
@@ -50,13 +50,13 @@ const makeEntry = (entry, initEntry) => {
         {}
     );
   }
-  if (typeof entry === "string") {
+  if (typeof entry === 'string') {
     return [initEntry, entry];
   }
   if (Array.isArray(entry)) {
     return [initEntry].concat(entry);
   }
-  if (typeof entry === "function") {
+  if (typeof entry === 'function') {
     return async () => {
       const originalEntry = await entry();
       return makeEntry(originalEntry, initEntry);
@@ -65,7 +65,7 @@ const makeEntry = (entry, initEntry) => {
 };
 
 class WebpackDayjsPlugin {
-  constructor(options = { preset: "antd" }) {
+  constructor(options = { preset: 'antd' }) {
     const { preset, plugins, replaceMoment } = options;
     if (preset && presets[preset]) {
       this.plugins = presets[preset].plugins;
@@ -84,7 +84,7 @@ class WebpackDayjsPlugin {
         test: /init-dayjs-webpack-plugin-entry\.js$/,
         use: [
           {
-            loader: path.resolve(__dirname, "./init-loader.js"),
+            loader: path.resolve(__dirname, './init-loader.js'),
             options: {
               plugins: this.plugins,
             },
@@ -98,7 +98,7 @@ class WebpackDayjsPlugin {
         compiler.options.module.rules = [initLoaderRule];
       }
 
-      const initFilePath = path.resolve(__dirname, "init-dayjs-webpack-plugin-entry.js");
+      const initFilePath = path.resolve(__dirname, 'init-dayjs-webpack-plugin-entry.js');
       const initEntry = require.resolve(initFilePath);
 
       compiler.options.entry = makeEntry(entry, initEntry);
@@ -107,10 +107,10 @@ class WebpackDayjsPlugin {
     if (this.replaceMoment) {
       const { alias } = compiler.options.resolve;
       if (alias) {
-        alias.moment = "dayjs";
+        alias.moment = 'dayjs';
       } else {
         compiler.options.resolve.alias = {
-          moment: "dayjs",
+          moment: 'dayjs',
         };
       }
     }
